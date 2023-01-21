@@ -1,5 +1,5 @@
 class TutorsController < ApplicationController
-  before_action :set_tutor, only: %i[ show edit update destroy ]
+  before_action :set_tutor, only: %i[ show edit update destroy find ]
 
   # GET /tutors or /tutors.json
   def index
@@ -56,7 +56,7 @@ class TutorsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_tutor

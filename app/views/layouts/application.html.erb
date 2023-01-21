@@ -7,9 +7,22 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
   </head>
 
   <body>
+    <ul>
+      <li><%= link_to "Strona główna", root_path %></li>
+      <li><%= link_to "Korepetytorzy", tutors_path %></li>
+      <li><%= link_to "Zajecia", klasses_path %></li>
+      <% if logged_in? %>
+        Zalogowany jako <%= current_user.username %>
+        <%= link_to "Profil", current_user %>
+        <%= link_to "Wyloguj", logout_path, data: { turbo_method: :delete} %>
+      <% else %>
+        <%= link_to "Zaloguj", login_path %>
+      <% end %>
+    </ul>
     <%= yield %>
   </body>
 </html>
