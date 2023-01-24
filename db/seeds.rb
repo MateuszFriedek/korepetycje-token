@@ -151,19 +151,19 @@ reviews = Review.create(
       creation_date: '2012-04-23T18:25:43.511Z',
       review: 'opinia 1',
       tutor_id: '1',
-      student_id: '6'
+      student_id: '1'
     },
     {
       creation_date: '2012-04-23T18:25:43.511Z',
       review: 'opinia 2',
       tutor_id: '1',
-      student_id: '7'
+      student_id: '2'
     },
     {
       creation_date: '2012-04-23T18:25:43.511Z',
       review: 'opinia 3',
       tutor_id: '2',
-      student_id: '8'
+      student_id: '3'
     }
   ]
 )
@@ -172,26 +172,26 @@ klasses = Klass.create(
   [
     {
       klass_date: '2012-04-23T18:25:43.511Z',
-      status: '',
+      status: 'oczekujace',
       subject: 'matematyka',
       subject_level: 'poziom podstawowy',
       tutor_id: '1',
-      student_id: ''
+      student_id: '1'
     },
     {
       klass_date: '2012-04-23T18:25:43.511Z',
-      status: '',
-      subject: 'poziom rozszezony',
-      subject_level: '6',
+      status: 'oczekujace',
+      subject: 'matematyka',
+      subject_level: 'poziom rosrzezony',
       tutor_id: '1',
       student_id: ''
     },
     {
       klass_date: '2012-04-23T18:25:43.511Z',
-      status: '',
-      subject: 'poziom podstawowy',
-      subject_level: '6',
-      tutor_id: '1',
+      status: 'oczekujace',
+      subject: 'matematyka',
+      subject_level: 'poziom podstawowy',
+      tutor_id: '2',
       student_id: ''
     }
   ]

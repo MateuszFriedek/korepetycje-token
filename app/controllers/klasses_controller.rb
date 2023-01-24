@@ -1,5 +1,6 @@
 class KlassesController < ApplicationController
-  before_action :set_klass, only: %i[ show edit update destroy ]
+  skip_before_action :verify_authenticity_token
+  before_action :set_klass, only: %i[ show edit update destroy search ]
 
   # GET /klasses or /klasses.json
   def index
@@ -8,6 +9,11 @@ class KlassesController < ApplicationController
 
   # GET /klasses/1 or /klasses/1.json
   def show
+  end
+
+  # GET /reviews/search.json
+  def search
+    @klasses = Klass.where("tutor_id = ?", params[:search][:tutor_id])
   end
 
   # GET /klasses/new

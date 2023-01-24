@@ -1,0 +1,47 @@
+rails db:drop db:create db:migrate db:seed
+Tutors:
+
+curl -X 'GET' -d '{ "search": { "subject": "fizyka", "location": "Wroclaw" } }' -H "Accept: application/json" -H "Content-Type: application/json" http://localhost:3000/tutors/search | json_pp
+
+curl -X 'GET' -H "Accept: application/json" http://localhost:3000/tutors/4 | json_pp
+
+curl -X 'PUT' -d '{"is_remote": true}' -H "Accept: application/json" -H "Content-Type: application/json" http://localhost:3000/tutors/4 | json_pp
+
+curl -X 'DELETE' -H "Accept: application/json" http://localhost:3000/tutors/4
+
+curl -X 'POST' -d '{ "tutor": {"name": "Gabriela Borowska", "degree": "lic.", "description": "opis", "email": "a@b.c", "location": "Wroclaw", "is_remote": "true", "phone_number": "123456789", "start_date": "2012-04-23T18:25:43.511Z", "subject": "fizyka", "user_id": "4"} }' -H "Accept: application/json" -H "Content-Type: application/json" http://localhost:3000/tutors/| json_pp
+
+Reviews:
+
+curl -X 'GET' -d '{ "search": { "tutor_id": "1"} }' -H "Accept: application/json" -H "Content-Type: application/json" http://localhost:3000/reviews/search | json_pp
+
+curl -X 'GET' -H "Accept: application/json" http://localhost:3000/reviews/2 | json_pp
+
+curl -X 'PUT' -d '{ "review": {"review": "Zajęcia prowadzone bardzo profesjonalnie i zrozumiale"} }' -H "Accept: application/json" -H "Content-Type: application/json" http://localhost:3000/reviews/2 | json_pp
+
+curl -X 'DELETE' -H "Accept: application/json" http://localhost:3000/reviews/1
+
+curl -X 'POST' -d '{ "review": {"creation_date": "2012-04-23T18:25:43.511Z", "review": "opinia 1", "tutor_id": "1", "student_id": "1"} }' -H "Accept: application/json" -H "Content-Type: application/json" http://localhost:3000/reviews | json_pp
+
+Klasses:
+
+curl -X 'GET' -d '{ "search": { "tutor_id": "1"} }' -H "Accept: application/json" -H "Content-Type: application/json" http://localhost:3000/klasses/search | json_pp
+
+curl -X 'GET' -H "Accept: application/json" http://localhost:3000/klasses/3 | json_pp
+
+curl -X 'PUT' -d '{ "klass": {"status": "zatwierdzone"} }' -H "Accept: application/json" -H "Content-Type: application/json" http://localhost:3000/klasses/2 | json_pp
+
+curl -X 'DELETE' -H "Accept: application/json" http://localhost:3000/klasses/3
+
+curl -X 'POST' -d '{ "klass": {"klass_date": "2012-04-23T18:25:43.511Z", "status": "oczekujace", "subject": "matematyka", "subject_level": "poziom podstawowy", "tutor_id": "2", "student_id": ""} }' -H "Accept: application/json" -H "Content-Type: application/json" http://localhost:3000/klasses | json_pp
+
+
+Students:
+
+curl -X 'GET' -H "Accept: application/json" http://localhost:3000/students/2 | json_pp
+
+curl -X 'PUT' -d '{ "student": {"phone_number": "111222333"} }' -H "Accept: application/json" -H "Content-Type: application/json" http://localhost:3000/students/2 | json_pp
+
+curl -X 'DELETE' -H "Accept: application/json" http://localhost:3000/students/2
+
+curl -X 'POST' -d '{ "student": {"name": "Krzysztof Kowalski", "email": "a@b.c", "phone_number": "123456789", "start_date": "2012-04-23T18:25:43.511Z", "user_id": "7"} }' -H "Accept: application/json" -H "Content-Type: application/json" http://localhost:3000/students | json_pp

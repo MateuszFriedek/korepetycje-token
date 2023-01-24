@@ -1,9 +1,15 @@
 class TutorsController < ApplicationController
-  before_action :set_tutor, only: %i[ show edit update destroy find ]
+  skip_before_action :verify_authenticity_token
+  before_action :set_tutor, only: %i[ show edit update destroy search ]
 
   # GET /tutors or /tutors.json
   def index
     @tutors = Tutor.all
+  end
+
+  # GET /tutors/search.json
+  def search
+    @tutors = Tutor.where("subject = ? AND location = ?", params[:search][:subject], params[:search][:location]) #"subject = 'matematyka'"
   end
 
   # GET /tutors/1 or /tutors/1.json
@@ -56,7 +62,7 @@ class TutorsController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_tutor

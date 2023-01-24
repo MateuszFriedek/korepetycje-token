@@ -1,5 +1,6 @@
 class ReviewsController < ApplicationController
-  before_action :set_review, only: %i[ show edit update destroy ]
+  skip_before_action :verify_authenticity_token
+  before_action :set_review, only: %i[ show edit update destroy search ]
 
   # GET /reviews or /reviews.json
   def index
@@ -8,6 +9,11 @@ class ReviewsController < ApplicationController
 
   # GET /reviews/1 or /reviews/1.json
   def show
+  end
+
+  # GET /reviews/search.json
+  def search
+    @reviews = Review.where("tutor_id = ?", params[:search][:tutor_id])
   end
 
   # GET /reviews/new
