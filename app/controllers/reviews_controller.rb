@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_action :set_review, only: %i[ show edit update destroy search ]
+  before_action :set_review, only: %i[ show edit update destroy ]
 
   # GET /reviews or /reviews.json
   def index

@@ -1,6 +1,6 @@
 class TutorsController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_action :set_tutor, only: %i[ show edit update destroy search ]
+  before_action :set_tutor, only: %i[ show edit update destroy ]
 
   # GET /tutors or /tutors.json
   def index
