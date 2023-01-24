@@ -3,6 +3,8 @@ Tutors:
 
 curl -X 'GET' -d '{ "search": { "subject": "fizyka", "location": "Wroclaw" } }' -H "Accept: application/json" -H "Content-Type: application/json" http://localhost:3000/tutors/search | json_pp
 
+curl -X 'GET' -d '{ "search": { "subject": "matematyka" } }' -H "Accept: application/json" -H "Content-Type: application/json" http://localhost:3000/tutors/search | json_pp
+
 curl -X 'GET' -H "Accept: application/json" http://localhost:3000/tutors/4 | json_pp
 
 curl -X 'PUT' -d '{"is_remote": true}' -H "Accept: application/json" -H "Content-Type: application/json" http://localhost:3000/tutors/4 | json_pp
@@ -27,6 +29,8 @@ Klasses:
 
 curl -X 'GET' -d '{ "search": { "tutor_id": "1"} }' -H "Accept: application/json" -H "Content-Type: application/json" http://localhost:3000/klasses/search | json_pp
 
+curl -X 'GET' -d '{ "search": { "student_id": "1"} }' -H "Accept: application/json" -H "Content-Type: application/json" http://localhost:3000/klasses/search | json_pp
+
 curl -X 'GET' -H "Accept: application/json" http://localhost:3000/klasses/3 | json_pp
 
 curl -X 'PUT' -d '{ "klass": {"status": "zatwierdzone"} }' -H "Accept: application/json" -H "Content-Type: application/json" http://localhost:3000/klasses/2 | json_pp
@@ -45,3 +49,11 @@ curl -X 'PUT' -d '{ "student": {"phone_number": "111222333"} }' -H "Accept: appl
 curl -X 'DELETE' -H "Accept: application/json" http://localhost:3000/students/2
 
 curl -X 'POST' -d '{ "student": {"name": "Krzysztof Kowalski", "email": "a@b.c", "phone_number": "123456789", "start_date": "2012-04-23T18:25:43.511Z", "user_id": "7"} }' -H "Accept: application/json" -H "Content-Type: application/json" http://localhost:3000/students | json_pp
+
+
+
+
+
+curl -X 'POST' -d '{ "user": {"username": "Jan123", "user_type": "Student", "password": "haslo123"} }' -H "Accept: application/json" -H "Content-Type: application/json" http://localhost:3000/users | json_pp
+
+curl -X 'POST' -d '{ "student": {"name": "Krzysztof Kowalski", "email": "a@b.c", "phone_number": "123456789", "start_date": "2012-04-23T18:25:43.511Z", "user_id": "9"} }' -H "Accept: application/json" -H "Content-Type: application/json" http://localhost:3000/students | json_pp

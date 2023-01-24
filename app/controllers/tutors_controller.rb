@@ -9,7 +9,12 @@ class TutorsController < ApplicationController
 
   # GET /tutors/search.json
   def search
-    @tutors = Tutor.where("subject = ? AND location = ?", params[:search][:subject], params[:search][:location]) #"subject = 'matematyka'"
+
+    if params[:search][:location].blank?
+      @tutors = Tutor.where("subject = ? AND is_remote = true", params[:search][:subject])
+    else
+      @tutors = Tutor.where("subject = ? AND location = ?", params[:search][:subject], params[:search][:location]) #"subject = ? AND location = ?", params[:search][:subject], params[:search][:location]
+    end
   end
 
   # GET /tutors/1 or /tutors/1.json

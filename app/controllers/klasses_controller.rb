@@ -13,7 +13,11 @@ class KlassesController < ApplicationController
 
   # GET /reviews/search.json
   def search
-    @klasses = Klass.where("tutor_id = ?", params[:search][:tutor_id])
+    if params[:search][:tutor_id].blank?
+      @klasses = Klass.where("student_id = ?", params[:search][:student_id])
+    else
+      @klasses = Klass.where("tutor_id = ?", params[:search][:tutor_id])
+    end
   end
 
   # GET /klasses/new
