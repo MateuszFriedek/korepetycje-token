@@ -11,7 +11,7 @@ class KlassesController < ApplicationController
   def show
   end
 
-  # GET /reviews/search.json
+  # POST /reviews/search.json
   def search
     if params[:search][:tutor_id].blank?
       @klasses = Klass.where("student_id = ?", params[:search][:student_id])

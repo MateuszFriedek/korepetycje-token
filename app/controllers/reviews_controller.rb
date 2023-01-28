@@ -11,7 +11,7 @@ class ReviewsController < ApplicationController
   def show
   end
 
-  # GET /reviews/search.json
+  # POST /reviews/search.json
   def search
     @reviews = Review.where("tutor_id = ?", params[:search][:tutor_id])
   end

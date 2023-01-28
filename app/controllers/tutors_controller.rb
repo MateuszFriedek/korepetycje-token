@@ -7,7 +7,7 @@ class TutorsController < ApplicationController
     @tutors = Tutor.all
   end
 
-  # GET /tutors/search.json
+  # POST /tutors/search.json
   def search
 
     if params[:search][:location].blank?

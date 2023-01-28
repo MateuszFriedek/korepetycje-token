@@ -7,11 +7,11 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
 
-  get '/tutors/search' ,  to: 'tutors#search'
+  post '/tutors/search' ,  to: 'tutors#search'
 
-  get '/reviews/search' ,  to: 'reviews#search'
+  post '/reviews/search' ,  to: 'reviews#search'
 
-  get '/klasses/search' ,  to: 'klasses#search'
+  post '/klasses/search' ,  to: 'klasses#search'
 
 
   resources :reviews
