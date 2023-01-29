@@ -27,21 +27,64 @@ class ReviewsController < ApplicationController
 
   # POST /reviews or /reviews.json
   def create
-    @review = Review.new(review_params)
 
     respond_to do |format|
-      if @review.save
-        format.html { redirect_to review_url(@review), notice: "Review was successfully created." }
-        format.json { render :show, status: :created, location: @review }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @review.errors, status: :unprocessable_entity }
+      format.html do
+        @review = Review.new(review_params)
+        if @review.save
+          redirect_to review_url(@review), notice: "Review was successfully created."
+        else
+          render :new, status: :unprocessable_entity
+        end
+      end
+      format.json do
+        require_token
+        @review = Review.new(review_params)
+        if current_user
+          if current_user.student.id == params[:review][:student_id].to_i
+            if @review.save
+              render :show, status: :created, location: @review
+            else
+              render json: @review.errors, status: :unprocessable_entity
+            end
+          else
+            render_unauthorized("Access denied")
+          end
+        end
       end
     end
   end
 
   # PATCH/PUT /reviews/1 or /reviews/1.json
   def update
+
+    respond_to do |format|
+      format.html do
+        if @review.update(review_params)
+          format.html { redirect_to review_url(@review), notice: "Review was successfully updated." }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+        end
+      end
+      format.json do
+        require_token
+        if current_user
+          p current_user.student.id
+          p params[:id].to_i
+          if current_user.student.id == params[:id].to_i
+            if @review.update(review_params)
+              render :show, status: :ok, location: @review
+            else
+              render json: @review.errors, status: :unprocessable_entity
+            end
+          else
+            render_unauthorized("Access denied")
+          end
+        end
+      end
+    end
+
+
     respond_to do |format|
       if @review.update(review_params)
         format.html { redirect_to review_url(@review), notice: "Review was successfully updated." }

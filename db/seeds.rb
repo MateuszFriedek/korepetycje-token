@@ -53,7 +53,7 @@ users = User.create(
 tutors = Tutor.create(
   [
     {
-      name: 'Amir Walczak',
+      name: 'Olaf Kowalski',
       degree: 'mgr',
       description: 'opis',
       email: 'a@b.c',
@@ -66,7 +66,7 @@ tutors = Tutor.create(
     },
     {
 
-      name: 'Olaf Kowalski',
+      name: 'Amir Walczak',
       degree: 'mgr',
       description: 'opis',
       email: 'a@b.c',

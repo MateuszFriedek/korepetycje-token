@@ -32,39 +32,81 @@ class TutorsController < ApplicationController
 
   # POST /tutors or /tutors.json
   def create
-    @tutor = Tutor.new(tutor_params)
 
     respond_to do |format|
-      if @tutor.save
-        format.html { redirect_to tutor_url(@tutor), notice: "Tutor was successfully created." }
-        format.json { render :show, status: :created, location: @tutor }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @tutor.errors, status: :unprocessable_entity }
+      format.html do
+        @tutor = Tutor.new(tutor_params)
+        if @tutor.save
+          redirect_to tutor_url(@tutor), notice: "Tutor was successfully created."
+        else
+          render :new, status: :unprocessable_entity
+        end
+      end
+      format.json do
+        require_token
+        @tutor = Tutor.new(tutor_params)
+        if current_user
+          if current_user.id == params[:tutor][:user_id].to_i
+            if @tutor.save
+              render :show, status: :created, location: @tutor
+            else
+              render json: @tutor.errors, status: :unprocessable_entity
+            end
+          else
+            render_unauthorized("Access denied")
+          end
+        end
       end
     end
   end
 
   # PATCH/PUT /tutors/1 or /tutors/1.json
   def update
+
     respond_to do |format|
-      if @tutor.update(tutor_params)
-        format.html { redirect_to tutor_url(@tutor), notice: "Tutor was successfully updated." }
-        format.json { render :show, status: :ok, location: @tutor }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @tutor.errors, status: :unprocessable_entity }
+      format.html do
+        if @tutor.update(tutor_params)
+          format.html { redirect_to tutor_url(@tutor), notice: "Tutor was successfully updated." }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+        end
+      end
+      format.json do
+        require_token
+        if current_user
+          if current_user.tutor.id == params[:id].to_i
+            if @tutor.update(tutor_params)
+              render :show, status: :ok, location: @tutor
+            else
+              render json: @tutor.errors, status: :unprocessable_entity
+            end
+          else
+            render_unauthorized("Access denied")
+          end
+        end
       end
     end
   end
 
   # DELETE /tutors/1 or /tutors/1.json
   def destroy
-    @tutor.destroy
 
     respond_to do |format|
-      format.html { redirect_to tutors_url, notice: "Tutor was successfully destroyed." }
-      format.json { head :no_content }
+      format.html do
+        @tutor.destroy
+        format.html { redirect_to tutors_url, notice: "Tutor was successfully destroyed." }
+      end
+      format.json do
+        require_token
+        if current_user
+          if current_user.tutor.id == params[:id].to_i
+            @tutor.destroy
+              render ok
+          else
+            render_unauthorized("Access denied")
+          end
+        end
+      end
     end
   end
 

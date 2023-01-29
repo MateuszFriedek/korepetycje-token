@@ -62,4 +62,4 @@ curl -X 'POST' -d '{ "student": {"name": "Krzysztof Kowalski", "email": "a@b.c",
 Logowanie:
 curl -X POST -d '{"username": "Olaf", "password": "haslo123"}' -H "Accept: application/json" -H "Content-Type: application/json" http://localhost:3000/login
 Wylogowywanie:
-curl -X DELETE -H "Authorization: Token 2xWvVKsPwVq1pbwaq5xempK3" http://localhost:3000/logout.json
+curl -X DELETE -H "Authorization: Token rke2UmWxw34NTF5UHd4JP5Uw" http://localhost:3000/logout.json
